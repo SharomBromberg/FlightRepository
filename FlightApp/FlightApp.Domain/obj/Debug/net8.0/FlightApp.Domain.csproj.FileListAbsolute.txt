@@ -1,0 +1,11 @@
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\bin\Debug\net8.0\FlightApp.Domain.deps.json
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\bin\Debug\net8.0\FlightApp.Domain.dll
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\bin\Debug\net8.0\FlightApp.Domain.pdb
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\FlightApp.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\FlightApp.Domain.AssemblyInfoInputs.cache
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\FlightApp.Domain.AssemblyInfo.cs
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\FlightApp.Domain.csproj.CoreCompileInputs.cache
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\FlightApp.Domain.dll
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\refint\FlightApp.Domain.dll
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\FlightApp.Domain.pdb
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\ref\FlightApp.Domain.dll

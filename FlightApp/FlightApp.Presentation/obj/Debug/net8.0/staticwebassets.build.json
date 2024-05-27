@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "QXjoOMkngeNLFw1U5ue6TNfgh9L1Ki55paierb6MQKk=",
+  "Source": "FlightApp.Presentation",
+  "BasePath": "_content/FlightApp.Presentation",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

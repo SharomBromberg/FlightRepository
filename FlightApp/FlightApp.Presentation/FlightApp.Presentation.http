@@ -1,0 +1,6 @@
+@FlightApp.Presentation_HostAddress = http://localhost:5253
+
+GET {{FlightApp.Presentation_HostAddress}}/Flights/
+Accept: application/json
+
+###
