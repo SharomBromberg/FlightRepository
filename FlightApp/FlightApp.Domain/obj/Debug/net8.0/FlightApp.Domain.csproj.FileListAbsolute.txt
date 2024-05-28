@@ -9,3 +9,4 @@ C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\FlightAp
 C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\refint\FlightApp.Domain.dll
 C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\FlightApp.Domain.pdb
 C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\ref\FlightApp.Domain.dll
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Domain\obj\Debug\net8.0\FlightApp.Domain.sourcelink.json

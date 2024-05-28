@@ -16,3 +16,4 @@ C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Infrastructure\bin\Debug\net8.0\
 C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Infrastructure\obj\Debug\net8.0\FlightApp.Infrastructure.csproj.AssemblyReference.cache
 C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Infrastructure\obj\Debug\net8.0\FlightAp.4740E50A.Up2Date
 C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Infrastructure\obj\Debug\net8.0\FlightApp.Infrastructure.genruntimeconfig.cache
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Infrastructure\obj\Debug\net8.0\FlightApp.Infrastructure.sourcelink.json

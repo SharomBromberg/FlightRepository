@@ -7,7 +7,6 @@ public class CurrencyService : ICurrencyService
 {
     private readonly string _apiKey = "LnP4IErKoQcKn0bEILY3KOuQ75WMVm4p";
     private readonly string _apiUrl = "https://api.apilayer.com/exchangerates_data";
-
     public async Task<double> ConvertCurrency(string from, string to, double amount)
     {
         if (to.ToUpper() == "USD")
@@ -35,7 +34,6 @@ public class CurrencyService : ICurrencyService
 
         return Convert.ToDouble(content?.result);
     }
-
     public async Task<IEnumerable<string>> GetAllCurrencies()
     {
         var client = new RestClient($"{_apiUrl}/all_currencies");

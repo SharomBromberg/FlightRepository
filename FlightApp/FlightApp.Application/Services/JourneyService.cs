@@ -45,7 +45,6 @@ public class JourneyService : IJourneyService
             route.Remove(flight);
         }
     }
-
     public async Task<IEnumerable<List<Flight>>> GetOneWayFlights(string origin, string destination, string currency, bool allowStops)
     {
         var routes = new List<List<Flight>>();
@@ -72,7 +71,6 @@ public class JourneyService : IJourneyService
 
         return await Task.FromResult(routes.AsEnumerable());
     }
-
     public async Task<IEnumerable<List<Flight>>> GetRoundTripFlights(string origin, string destination, string currency, bool allowStops)
     {
         var routes = new List<List<Flight>>();
@@ -107,7 +105,6 @@ public class JourneyService : IJourneyService
         {
             roundTrips = roundTrips.Where(r => r.Count == 2 && r.First().Origin == origin && r.First().Destination == destination && r.Last().Origin == destination && r.Last().Destination == origin).ToList();
         }
-
         foreach (var routeList in roundTrips)
         {
             foreach (var flight in routeList)
@@ -118,15 +115,6 @@ public class JourneyService : IJourneyService
                 }
             }
         }
-
         return roundTrips;
-    }    // public Task<IEnumerable<List<Flight>>> GetOneWayFlights(string origin, string destination, string currency, bool allowStops, bool direct)
-    // {
-    //     throw new NotImplementedException();
-    // }
-
-    // public Task<IEnumerable<List<Flight>>> GetRoundTripFlights(string origin, string destination, string currency, bool allowStops, bool direct)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    }
 }

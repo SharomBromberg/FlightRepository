@@ -16,3 +16,4 @@ C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Application\obj\Debug\net8.0\ref
 C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Application\bin\Debug\net8.0\FlightApp.Infrastructure.dll
 C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Application\bin\Debug\net8.0\FlightApp.Infrastructure.pdb
 C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Application\bin\Debug\net8.0\Data\markets.json
+C:\Users\SHAROM\Desktop\SBG\FlightApp\FlightApp.Application\obj\Debug\net8.0\FlightApp.Application.sourcelink.json
