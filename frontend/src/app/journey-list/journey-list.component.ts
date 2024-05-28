@@ -31,11 +31,10 @@ export class JourneyListComponent implements OnInit {
 
   getAllFlights(): void {
     this.journeyService.getAllFlights().subscribe(data => {
-      console.log(this.flights);
+
       this.flights = data;
       this.origins = [...new Set(data.map(flight => flight.origin))];
       this.destinations = [...new Set(data.map(flight => flight.destination))];
-
 
     }, error => {
       console.error('Error:', error);
@@ -46,7 +45,7 @@ export class JourneyListComponent implements OnInit {
     this.getAllFlights();
     this.displayFlights = true;
     this.displayJourneys = false;
-
+    console.log(this.flights);
   }
 
   getFlights(): void {

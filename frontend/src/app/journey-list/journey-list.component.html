@@ -77,6 +77,12 @@
         </thead>
         <tbody>
             <ng-container *ngFor="let journey of journeys">
+                <td>{{journey.origin}}</td>
+                <td>{{journey.destination}}</td>
+                <td></td>
+                <td></td>
+                <td>{{journey.price}}</td>
+
                 <tr *ngFor="let flight of journey.flights">
                     <td>{{ flight.transport.flightCarrier }}</td>
                     <td>{{ flight.transport.flightNumber }}</td>

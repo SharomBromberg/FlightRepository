@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { FlightInterface } from '../interfaces/flight-interface';
 import { JourneyInterface } from '../interfaces/journey-interface';
 
@@ -19,6 +19,8 @@ export class JourneyService {
 
   getFlights(origin: string, destination: string, currency: string, type: string, allowStops: boolean): Observable<JourneyInterface[]> {
     let newVariable = `${this.apiUrl}/Flight/Flights?origin=${origin}&destination=${destination}&currency=${currency}&type=${type}&allowStops=${allowStops}`;
-    return this.http.get<JourneyInterface[]>(newVariable);
+    return this.http.get<{ journey: JourneyInterface }[]>(newVariable).pipe(
+      map(journeys => journeys.map(item => item.journey))
+    );
   }
 }
