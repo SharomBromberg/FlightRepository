@@ -1,6 +1,4 @@
-
-
-using FlightAPP.Domain.Interfaces;
+using FlightAPP.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("[controller]")]
@@ -26,13 +24,15 @@ public class FlightController : ControllerBase
     {
         if (type == "round")
         {
-            var flights = await _journeyService.GetRoundTripFlights(origin, destination, currency, allowStops);
-            return Ok(flights);
+            var journeys = await _journeyService.GetRoundTripFlights(origin, destination, currency, allowStops);
+            var result = journeys.Select(j => new { journey = j });
+            return Ok(result);
         }
         else if (type == "oneway")
         {
-            var flights = await _journeyService.GetOneWayFlights(origin, destination, currency, allowStops);
-            return Ok(flights);
+            var journeys = await _journeyService.GetOneWayFlights(origin, destination, currency, allowStops);
+            var result = journeys.Select(j => new { journey = j });
+            return Ok(result);
         }
         else
         {

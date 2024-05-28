@@ -1,5 +1,5 @@
 
-namespace FlightAPP.Domain.Interfaces;
+namespace FlightAPP.Application.Interfaces;
 
 public interface ICurrencyService
 {

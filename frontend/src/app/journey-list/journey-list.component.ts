@@ -31,9 +31,11 @@ export class JourneyListComponent implements OnInit {
 
   getAllFlights(): void {
     this.journeyService.getAllFlights().subscribe(data => {
+      console.log(this.flights);
       this.flights = data;
       this.origins = [...new Set(data.map(flight => flight.origin))];
       this.destinations = [...new Set(data.map(flight => flight.destination))];
+
 
     }, error => {
       console.error('Error:', error);
@@ -48,27 +50,13 @@ export class JourneyListComponent implements OnInit {
   }
 
   getFlights(): void {
-    if (!this.origin || !this.destination || !this.currency || !this.type) {
-      this.journeys = [];
-      return;
-    }
-
-    this.journeyService.getFlights(this.origin, this.destination, this.currency, this.type, this.allowStops).subscribe(data => {
-      if (Array.isArray(data)) {
-        this.journeys = data;
-      } else {
-        this.journeys = Object.values(data);
-      }
-
-      const firstFlight = this.journeys[0]?.flights[0];
-      if (firstFlight) {
-        console.log(firstFlight);
-      } else {
-        console.log('No flights found.');
-      }
-    }, error => {
-      console.error('Error fetching flights:', error);
-    });
+    this.journeyService.getFlights(this.origin, this.destination, this.currency, this.type, this.allowStops)
+      .subscribe(journeys => {
+        console.log(journeys);
+        this.journeys = journeys;
+      }, error => {
+        console.error('Error:', error);
+      });
   }
 
   displaySearchedFlights(): void {

@@ -17,15 +17,8 @@ export class JourneyService {
     return this.http.get<FlightInterface[]>(`${this.apiUrl}/Flight/AllFlights`);
   }
 
-  getOneWayFlights(origin: string, destination: string, currency: string, type: string, allowStops: boolean): Observable<JourneyInterface> {
-    return this.http.get<JourneyInterface>(`${this.apiUrl}/Flight/Flights?origin=${origin}&destination=${destination}&currency=${currency}&type=oneway&allowStops=${allowStops}`);
-  }
-
-  getRoundTripFlights(origin: string, destination: string, currency: string, type: string, allowStops: boolean): Observable<JourneyInterface> {
-    return this.http.get<JourneyInterface>(`${this.apiUrl}/Flight/Flights?origin=${origin}&destination=${destination}&currency=${currency}&type=round&allowStops=${allowStops}`);
-  }                                                      //Flight/Flights?origin=MZL&destination=BOG&currency=USD&type=oneway&allowStops=true
-
   getFlights(origin: string, destination: string, currency: string, type: string, allowStops: boolean): Observable<JourneyInterface[]> {
-    return this.http.get<JourneyInterface[]>(`${this.apiUrl}/Flight/Flights?origin=${origin}&destination=${destination}&currency=${currency}type=${type}&allowStops=${allowStops}`);
+    let newVariable = `${this.apiUrl}/Flight/Flights?origin=${origin}&destination=${destination}&currency=${currency}&type=${type}&allowStops=${allowStops}`;
+    return this.http.get<JourneyInterface[]>(newVariable);
   }
 }

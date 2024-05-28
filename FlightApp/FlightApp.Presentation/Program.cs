@@ -1,7 +1,6 @@
+
+using FlightAPP.Application.Interfaces;
 using FlightAPP.Application.Services;
-using FlightAPP.Domain.Interfaces;
-// using FlightAPP.Infrastructure.Data.Contexts;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
