@@ -11,7 +11,7 @@ import { FlightInterface } from '../interfaces/flight-interface';
 export class JourneyListComponent implements OnInit {
 
   journeys: JourneyInterface[] = [];
-  allFlights: FlightInterface[] = [];
+  flights: FlightInterface[] = [];
   origins: string[] = [];
   destinations: string[] = [];
   currencies: string[] = ['USD', 'EUR', 'GBP', 'COP', 'ARS', 'BRL', 'MXN', 'CLP', 'PEN', 'UYU', 'VEF'];
@@ -31,7 +31,7 @@ export class JourneyListComponent implements OnInit {
 
   getAllFlights(): void {
     this.journeyService.getAllFlights().subscribe(data => {
-      this.allFlights = data;
+      this.flights = data;
       this.origins = [...new Set(data.map(flight => flight.origin))];
       this.destinations = [...new Set(data.map(flight => flight.destination))];
 
@@ -43,8 +43,37 @@ export class JourneyListComponent implements OnInit {
   displayAllFlights(): void {
     this.getAllFlights();
     this.displayFlights = true;
+    this.displayJourneys = false;
+
   }
 
-  //buscar un vuelo con o sin paradas de un origen a un destino
+  getFlights(): void {
+    if (!this.origin || !this.destination || !this.currency || !this.type) {
+      this.journeys = [];
+      return;
+    }
 
+    this.journeyService.getFlights(this.origin, this.destination, this.currency, this.type, this.allowStops).subscribe(data => {
+      if (Array.isArray(data)) {
+        this.journeys = data;
+      } else {
+        this.journeys = Object.values(data);
+      }
+
+      const firstFlight = this.journeys[0]?.flights[0];
+      if (firstFlight) {
+        console.log(firstFlight);
+      } else {
+        console.log('No flights found.');
+      }
+    }, error => {
+      console.error('Error fetching flights:', error);
+    });
+  }
+
+  displaySearchedFlights(): void {
+    this.getFlights();
+    this.displayJourneys = true;
+    this.displayFlights = false;
+  }
 }
