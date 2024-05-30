@@ -12,8 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IJourneyService, JourneyService>();
 builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 builder.Services.AddScoped<IJourneyRepository, JourneyRepository>();
-// builder.Services.AddScoped<IFlightRepository, FlightRepository>();
-// builder.Services.AddScoped<DataInitializer>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
