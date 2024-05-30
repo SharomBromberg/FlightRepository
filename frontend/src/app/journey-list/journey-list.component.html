@@ -1,5 +1,5 @@
 <div class="search">
-    <h1>Search a Flight</h1>
+    <h1>Search Flights</h1>
     <div class="search__routes">
         <div class="search__routes__box">
             <h4>Origin:</h4>
@@ -34,13 +34,17 @@
             </select>
         </div>
     </div>
-    <!-- <button (click)="searchFlights()">Search</button> -->
-    <button (click)="displaySearchedFlights()">Search</button>
-    <label>
-        <input type="checkbox" [(ngModel)]="allowStops">
-        Allow stops
-    </label>
-    <button (click)="displayAllFlights()">All available flights</button>
+    <div class="search__select">
+        <div class="search__select__buttons">
+            <button (click)="displaySearchedFlights()">Search</button>
+            <button (click)="displayAllFlights()">All available flights</button>
+        </div>
+        <label>
+            <input type="checkbox" [(ngModel)]="allowStops">
+            Allow stops
+        </label>
+    </div>
+
 
 </div>
 <div class="result">
@@ -61,40 +65,57 @@
                 <td>{{flight.transport.flightNumber}}</td>
                 <td>{{flight.origin}}</td>
                 <td>{{flight.destination}}</td>
-                <td>{{flight.price}}</td>
+                <td>USD: {{flight.price}}</td>
             </tr>
         </tbody>
     </table>
-    <table *ngIf="displayJourneys">
-        <thead>
-            <tr>
-                <th>Flight Carrier</th>
-                <th>Flight Number</th>
-                <th>Origin</th>
-                <th>Destination</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let journey of journeys">
-                <td>{{journey.origin}}</td>
-                <td>{{journey.destination}}</td>
-                <td></td>
-                <td></td>
-                <td>{{journey.price}}</td>
 
-                <tr *ngFor="let flight of journey.flights">
-                    <td>{{ flight.transport.flightCarrier }}</td>
-                    <td>{{ flight.transport.flightNumber }}</td>
-                    <td>{{ flight.origin }}</td>
-                    <td>{{ flight.destination }}</td>
-                    <td>{{ flight.price }}</td>
-                </tr>
-            </ng-container>
-        </tbody>
-    </table>
+    <ng-container *ngFor="let journey of journeys;  let i = index">
+        <h3 class="result__option">Option {{ i + 1 }}</h3>
+        <div *ngIf="displayJourneys">
+            <h3>Flight</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Origin</th>
+                        <th>Destination</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>{{journey.origin}}</strong></td>
+                        <td><strong> {{journey.destination}}</strong></td>
+                        <td>{{currency}} {{journey.price}} </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Routes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Flight Carrier</th>
+                        <th>Flight Number</th>
+                        <th>Origin</th>
+                        <th>Destination</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let flight of journey.flights">
+                        <td>{{ flight.transport.flightCarrier }}</td>
+                        <td>{{ flight.transport.flightNumber }}</td>
+                        <td>{{ flight.origin }}</td>
+                        <td>{{ flight.destination }}</td>
+                        <td>{{currency}} {{ flight.price }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
 
     <div *ngIf="displayJourneys && journeys.length === 0">
         No se encontraron vuelos.
     </div>
+
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JourneyInterface } from '../interfaces/journey-interface';
 import { JourneyService } from '../services/journey.service';
 import { FlightInterface } from '../interfaces/flight-interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-journey-list',
@@ -23,7 +24,7 @@ export class JourneyListComponent implements OnInit {
   displayFlights: boolean = false;
   displayJourneys: boolean = false;
 
-  constructor(private journeyService: JourneyService) { }
+  constructor(private journeyService: JourneyService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllFlights();
@@ -59,6 +60,10 @@ export class JourneyListComponent implements OnInit {
   }
 
   displaySearchedFlights(): void {
+    if (!this.origin || !this.destination || !this.currency || !this.type) {
+      this.toastr.warning('Please fill in all fields', 'Warning');
+      return;
+    }
     this.getFlights();
     this.displayJourneys = true;
     this.displayFlights = false;

@@ -1,4 +1,6 @@
+using FlightApp.Infrastructure.Interfaces;
 using FlightAPP.Application.Interfaces;
+using FlightAPP.Domain.Entities;
 using FlightAPP.Domain.Models;
 using Newtonsoft.Json;
 
@@ -9,9 +11,10 @@ namespace FlightAPP.Application.Services
         private readonly string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "markets.json");
         private List<Flight> _flights;
         private readonly ICurrencyService _currencyService;
-
-        public JourneyService(ICurrencyService currencyService)
+        private readonly IJourneyRepository _journeyRepository;
+        public JourneyService(ICurrencyService currencyService, IJourneyRepository journeyRepository)
         {
+            _journeyRepository = journeyRepository;
             _currencyService = currencyService;
             _flights = new List<Flight>();
             try
@@ -44,6 +47,37 @@ namespace FlightAPP.Application.Services
             return await Task.FromResult(_flights.AsEnumerable());
         }
 
+        public async Task SaveJourney(Journey journey)
+        {
+            try
+            {
+                var journeyEntity = new JourneyEntity
+                {
+                    Flights = journey.Flights.Select(f => new FlightEntity
+                    {
+                        Transport = new TransportEntity
+                        {
+                            FlightCarrier = f.Transport.FlightCarrier,
+                            FlightNumber = f.Transport.FlightNumber,
+                        },
+
+                        Origin = f.Origin,
+                        Destination = f.Destination,
+                        Price = f.Price
+
+                    }).ToList(),
+                    Origin = journey.Origin,
+                    Destination = journey.Destination,
+                    Price = (decimal)journey.Price,
+
+                };
+                await _journeyRepository.AddJourney(journeyEntity);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al guardar el viaje.", ex);
+            }
+        }
         private void FindRoutes(string current, string destination, HashSet<string> visited, List<List<Flight>> routes, List<Flight> route)
         {
             var flights = _flights.Where(f => f.Origin == current && !visited.Contains(f.Destination));
@@ -66,7 +100,6 @@ namespace FlightAPP.Application.Services
 
         public async Task<IEnumerable<Journey>> GetOneWayFlights(string origin, string destination, string currency, bool allowStops)
         {
-
             try
             {
                 var routes = new List<List<Flight>>();
@@ -99,6 +132,8 @@ namespace FlightAPP.Application.Services
                     }
                     journey.Price = journey.Flights.Sum(f => f.Price);
                     journeys.Add(journey);
+
+                    await SaveJourney(journey);
                 }
 
                 return await Task.FromResult(journeys.AsEnumerable());
@@ -107,12 +142,10 @@ namespace FlightAPP.Application.Services
             {
                 throw new Exception("Error al obtener los vuelos de ida.", ex);
             }
-
         }
 
         public async Task<IEnumerable<Journey>> GetRoundTripFlights(string origin, string destination, string currency, bool allowStops)
         {
-
             try
             {
                 var routes = new List<List<Flight>>();
@@ -153,6 +186,8 @@ namespace FlightAPP.Application.Services
                         }
                         journey.Price = journey.Flights.Sum(f => f.Price);
                         journeys.Add(journey);
+
+                        await SaveJourney(journey);
                     }
                 }
 
