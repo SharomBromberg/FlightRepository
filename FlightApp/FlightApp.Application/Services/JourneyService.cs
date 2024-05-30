@@ -35,6 +35,33 @@ namespace FlightAPP.Application.Services
             {
                 var json = await File.ReadAllTextAsync(_filePath);
                 _flights = JsonConvert.DeserializeObject<List<Flight>>(json) ?? new List<Flight>();
+                var dbFlights = await _journeyRepository.GetFlights();
+                if (!dbFlights.Any())
+                {
+                    var flightEntities = _flights.Select(f => new FlightEntity
+                    {
+                        FlightCarrier = f.Transport.FlightCarrier,
+                        FlightNumber = f.Transport.FlightNumber,
+                        Origin = f.Origin,
+                        Destination = f.Destination,
+                        Price = f.Price
+                    }).ToList();
+                    await _journeyRepository.SaveFlights(flightEntities);
+                }
+                else
+                {
+                    _flights = dbFlights.Select(f => new Flight
+                    {
+                        Transport = new Transport
+                        {
+                            FlightCarrier = f.FlightCarrier,
+                            FlightNumber = f.FlightNumber,
+                        },
+                        Origin = f.Origin,
+                        Destination = f.Destination,
+                        Price = f.Price
+                    }).ToList();
+                }
             }
             catch (Exception ex)
             {
@@ -47,37 +74,7 @@ namespace FlightAPP.Application.Services
             return await Task.FromResult(_flights.AsEnumerable());
         }
 
-        public async Task SaveJourney(Journey journey)
-        {
-            try
-            {
-                var journeyEntity = new JourneyEntity
-                {
-                    Flights = journey.Flights.Select(f => new FlightEntity
-                    {
-                        Transport = new TransportEntity
-                        {
-                            FlightCarrier = f.Transport.FlightCarrier,
-                            FlightNumber = f.Transport.FlightNumber,
-                        },
 
-                        Origin = f.Origin,
-                        Destination = f.Destination,
-                        Price = f.Price
-
-                    }).ToList(),
-                    Origin = journey.Origin,
-                    Destination = journey.Destination,
-                    Price = (decimal)journey.Price,
-
-                };
-                await _journeyRepository.AddJourney(journeyEntity);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al guardar el viaje.", ex);
-            }
-        }
         private void FindRoutes(string current, string destination, HashSet<string> visited, List<List<Flight>> routes, List<Flight> route)
         {
             var flights = _flights.Where(f => f.Origin == current && !visited.Contains(f.Destination));
@@ -102,6 +99,8 @@ namespace FlightAPP.Application.Services
         {
             try
             {
+
+
                 var routes = new List<List<Flight>>();
                 var visited = new HashSet<string>();
                 var route = new List<Flight>();
@@ -133,7 +132,7 @@ namespace FlightAPP.Application.Services
                     journey.Price = journey.Flights.Sum(f => f.Price);
                     journeys.Add(journey);
 
-                    await SaveJourney(journey);
+                    // await SaveJourney(journey);
                 }
 
                 return await Task.FromResult(journeys.AsEnumerable());
@@ -187,7 +186,7 @@ namespace FlightAPP.Application.Services
                         journey.Price = journey.Flights.Sum(f => f.Price);
                         journeys.Add(journey);
 
-                        await SaveJourney(journey);
+                        // await SaveJourney(journey);
                     }
                 }
 

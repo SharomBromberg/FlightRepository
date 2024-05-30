@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using FlightAPP.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlightApp.Data.Infrastructure
 {
@@ -10,9 +10,8 @@ namespace FlightApp.Data.Infrastructure
         {
         }
 
-        public DbSet<JourneyEntity> Journeys { get; set; }
         public DbSet<FlightEntity> Flights { get; set; }
-        public DbSet<TransportEntity> Transports { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

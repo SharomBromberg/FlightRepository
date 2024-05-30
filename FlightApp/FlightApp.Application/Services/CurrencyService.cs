@@ -5,7 +5,7 @@ using RestSharp;
 namespace FlightAPP.Application.Services;
 public class CurrencyService : ICurrencyService
 {
-    private readonly string _apiKey = "LnP4IErKoQcKn0bEILY3KOuQ75WMVm4p";
+    private readonly string _apiKey = "CqBJVon8Nfc9hll48f15UuxICAwEChLb";
     private readonly string _apiUrl = "https://api.apilayer.com/exchangerates_data";
     public async Task<double> ConvertCurrency(string from, string to, double amount)
     {

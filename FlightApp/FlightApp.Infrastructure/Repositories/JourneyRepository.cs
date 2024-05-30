@@ -16,26 +16,15 @@ namespace FlightApp.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<JourneyEntity>> GetAllJourneys()
-        {
-            return await _context.Journeys.ToListAsync();
-        }
-
-        public async Task AddJourney(JourneyEntity journey)
-        {
-            _context.Journeys.Add(journey);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<FlightEntity>> GetFlights()
+        public async Task<List<FlightEntity>> GetFlights()
         {
             return await _context.Flights.ToListAsync();
         }
-
-        public async Task AddFlight(FlightEntity flight)
+        public async Task SaveFlights(List<FlightEntity> flights)
         {
-            _context.Flights.Add(flight);
+            _context.Flights.AddRange(flights);
             await _context.SaveChangesAsync();
         }
+
     }
 }

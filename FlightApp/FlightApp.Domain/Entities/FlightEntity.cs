@@ -1,14 +1,14 @@
-﻿namespace FlightAPP.Domain.Entities
+﻿
+namespace FlightAPP.Domain.Entities
 {
     public class FlightEntity
     {
+        public required string FlightCarrier { get; set; }
+        public required string FlightNumber { get; set; }
         public int Id { get; set; }
-        public int? TransportId { get; set; }
-        public virtual TransportEntity? Transport { get; set; }
-        public string Origin { get; set; } = null!;
-        public string Destination { get; set; } = null!;
+        public required string Origin { get; set; }
+        public required string Destination { get; set; }
         public double Price { get; set; }
 
-        public virtual ICollection<JourneyEntity> Journeys { get; set; } = new List<JourneyEntity>();
     }
 }
