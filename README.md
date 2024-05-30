@@ -110,4 +110,4 @@ este archivo contiene dos secciones principales
    -getAllFlights() es un método que devuelve un Observable de un array de FlightInterface. Hace una solicitud GET a la API para obtener todos los vuelos.
    -getFlights() es un método que toma varios parámetros y devuelve un Observable de un array de JourneyInterface. Hace una solicitud GET a la API para obtener vuelos que coinciden con los parámetros proporcionados. Utiliza el operador map de RxJS para transformar la respuesta antes de devolverla.
 
-Tiempo total de desarrollo: 3 díasse completó el proyecto con los requerimientos necesarios del test.
+Tiempo total de desarrollo: 3 días se completó el proyecto con los requerimientos necesarios del test.
